@@ -16,8 +16,11 @@ public class Menu {
         System.out.println("9. find keyword - keyword가 제목, 내용에 들어간 과제 검색");
         System.out.println("10. find_cate keyword - keyword가 cate에 들어간 과제 검색");
         System.out.println("11. ls_cate - 카테고리 목록 보기");
-        System.out.println("12. exit - 프로그램 종료하기");
-        System.out.println("13. reset - 프로그램 데이터 초기화 (프로그램 최초 사용시 실행해주세요)");
+        System.out.println("12. comp id - 완료 과제 체크하기");
+        System.out.println("13. ls_comp - 완료한 과제만 보기");
+        System.out.println("14. impo - 과제 중요도 등록하기");
+        System.out.println("15. exit - 프로그램 종료하기");
+        System.out.println("16. reset - 프로그램 데이터 초기화 (프로그램 최초 사용시 실행해주세요)");
         
     }
     public static void Prompt()

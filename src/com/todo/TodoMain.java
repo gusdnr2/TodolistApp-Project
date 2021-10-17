@@ -13,6 +13,8 @@ public class TodoMain {
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
 		boolean quit = false;
+		int number,checker,id;
+		String imp;
 		//l.importData(filename);
 		Menu.displaymenu();
 		do {
@@ -88,6 +90,42 @@ public class TodoMain {
 			case "find":
 				TodoUtil.find(l, choice2);
 				break;
+				
+			case "comp":
+				TodoUtil.completeItem(l, Integer.parseInt(choice2));
+				break;
+				
+			case "ls_comp":
+				TodoUtil.listAll(l,1);
+				break;
+			case "add_multi":
+				System.out.print("추가를 원하는 항목의 개수 입력 > ");
+				number = sc.nextInt();
+				checker = 0;
+				for (int i=0; i<number; i++) {
+					TodoUtil.createItem(l);
+					System.out.print("계속 하시겠습니까? (멈추기 위해 0 입력) > ");
+					checker = sc.nextInt();
+					if (checker == 0)
+						break;
+				}
+				break;
+			case "edit_multi":
+				System.out.print("수정을 원하는 항목의 개수 입력 > ");
+				number = sc.nextInt();
+				checker = 0;
+				for (int i=0; i<number; i++) {
+					TodoUtil.updateItem(l);
+					System.out.print("계속 하시겠습니까? (멈추기 위해 0 입력) > ");
+					checker = sc.nextInt();
+					if (checker == 0)
+						break;
+				}
+				break;
+			case "impo":
+				id = sc.nextInt();
+				imp = sc.next();
+				TodoUtil.importanceItem(l,id,imp);
 				
 			default:
 				System.out.println("정확한 명령어를 입력해 주세요. \n명령어 목록이 궁금하시면 help 명령어를 사용해 주세요.");

@@ -17,7 +17,7 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList list) {
 		
-		String title, desc, category, due_date;
+		String title, desc, category, due_date, importance;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("=== 항목 추가 ===\n"
@@ -38,7 +38,10 @@ public class TodoUtil {
 		System.out.println("마감 일자 (예시 : 0000/00/00) > ");
 		due_date = sc.next();
 		
-		TodoItem t = new TodoItem(title, desc, category, due_date);
+		System.out.print("중요도 입력 (중요, 보통, 낮음) > ");
+		importance = sc.next();
+		
+		TodoItem t = new TodoItem(title, desc, category, due_date, importance);
 		if(list.addItem(t)>0)
 			System.out.println("성공적으로 추가하였습니다.");
 	}
@@ -79,8 +82,11 @@ public class TodoUtil {
 		String new_description = sc.nextLine().trim();
 		System.out.print("새로운 마감 일자를 입력해 주세요 > ");
 		String new_ddat = sc.nextLine().trim();
+		System.out.print("중요도 입력 (중요, 보통, 낮음) > ");
+		String importance = sc.next();
+		
 
-		TodoItem t = new TodoItem(new_title, new_description, new_cate, new_ddat);
+		TodoItem t = new TodoItem(new_title, new_description, new_cate, new_ddat, importance);
         t.setId(index);
 		if(l.updateItem(t)>0) 
 			System.out.println("수정되었습니다.");
@@ -139,6 +145,25 @@ public class TodoUtil {
 			count++;
 		}
 		System.out.printf("\n전체 카테고리의 개수는 %d개입니다.\n",count);
+	}
+	public static void listAll(TodoList l, int num) {
+		System.out.println("[전체 목록, 총 "+l.getCount()+"개]\n");
+		for (TodoItem item : l.getList(num)) {
+			System.out.println(item.toString());
+		}
+	}
+	public static void completeItem(TodoList l, int num) {
+		if(l.completeItem(num)>0) {
+			System.out.println("등록을 완료했습니다.");
+		}
+		else
+			System.out.println("문제가 발생했습니다.");
+	}
+	public static void importanceItem(TodoList l, int num, String imp) {
+		if(l.importanceItem(num, imp)>0)
+			System.out.println("등록을 완료했습니다.");
+		else
+			System.out.println("문제가 발생했습니다.");
 	}
 }
 	

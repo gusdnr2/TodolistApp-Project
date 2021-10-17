@@ -18,32 +18,53 @@ public class TodoItem {
     private String current_date;
     private String category;
     private String due_date;
+    private int is_completed;
+    private String importance;
 
 
-    public TodoItem(String title, String desc, String category, String due_date){
+    public  String getImportance() {
+		return importance;
+	}
+
+	public void setImportance(String importance) {
+		this.importance = importance;
+	}
+
+	public int getIs_completed() {
+		return is_completed;
+	}
+
+	public void setIs_completed(int is_completed) {
+		this.is_completed = is_completed;
+	}
+
+	public TodoItem(String title, String desc, String category, String due_date, String importance){
         this.title=title;
         this.desc=desc;
         this.category=category;
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
         this.current_date= f.format(new Date());
         this.due_date = due_date;
+        this.importance = importance;
     }
     
-    public TodoItem(int id, String title, String desc, String date, String category, String due_date){
+    public TodoItem(int id, String title, String desc, String date, String category, String due_date, String importance){
     	this.id = id;
         this.title=title;
         this.desc=desc;
         this.current_date=date;
         this.category=category;
         this.due_date=due_date;
+        this.importance = importance;
     }
     
-    public TodoItem(String title, String desc, String date, String category, String due_date){
+    public TodoItem(String title, String desc, String date, String category, String due_date,String importance){
         this.title=title;
         this.desc=desc;
         this.current_date=date;
         this.category=category;
         this.due_date=due_date;
+        this.importance = importance;
     }
     
     public String getTitle() {
@@ -88,7 +109,13 @@ public class TodoItem {
 
 	@Override
 	public String toString() {
-		return id+". [" + category + "] "+ title + " - " + desc + " " + due_date + " " + current_date;
+		if(is_completed == 0) 
+			return id+". [" + category + "] "+ title + " - " + desc + " " + due_date + " " + current_date + " " + importance;
+		else if (is_completed == 1)
+			return id+". [" + category + "] "+ title +"[V]"+ " - " + desc + " " + due_date + " " + current_date + " " + importance;
+		return id+". [" + category + "] "+ title + " - " + desc + " " + due_date + " " + current_date + " " + importance;
+			
+		
 	}
 	
 	public String toSaveString() {
