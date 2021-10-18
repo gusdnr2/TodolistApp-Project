@@ -54,8 +54,8 @@ public class TodoList {
 	}
 */
 	public int addItem(TodoItem t) {
-		String sql = "insert into list (title, memo, category, current_date, due_date, importance)"+
-	" values (?,?,?,?,?,?)";
+		String sql = "insert into list (title, memo, category, current_date, due_date, importance, date)"+
+	" values (?,?,?,?,?,?,?)";
 		PreparedStatement pstmt;
 		int count=0;
 		try {
@@ -66,6 +66,7 @@ public class TodoList {
 			pstmt.setString(4,t.getCurrent_date());
 			pstmt.setString(5,t.getDue_date());
 			pstmt.setString(6,t.getImportance());
+			pstmt.setString(7,t.getDays());
 			count = pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -92,7 +93,7 @@ public class TodoList {
 	}
 
 	public int updateItem(TodoItem t) {
-		String sql = "update list set title=?, memo=?, category=?, current_date=?,  due_date=?, importance=?"+" where id=?;";
+		String sql = "update list set title=?, memo=?, category=?, current_date=?,  due_date=?, importance=?, date=?"+" where id=?;";
 		PreparedStatement pstmt;
 		int count=0;
 		try {
@@ -103,7 +104,8 @@ public class TodoList {
 			pstmt.setString(4,t.getCurrent_date());
 			pstmt.setString(5,t.getDue_date());
 			pstmt.setString(6,t.getImportance());
-			pstmt.setInt(7,t.getId());
+			pstmt.setString(7,t.getDays());
+			pstmt.setInt(8,t.getId());
 			
 			count = pstmt.executeUpdate();
 			pstmt.close();
@@ -135,6 +137,7 @@ public class TodoList {
 				t.setCurrent_date(current_date);
 				t.setIs_completed(comp);
 				list.add(t);
+			    
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -189,7 +192,9 @@ public class TodoList {
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
 				String importance = rs.getString("importance");
-				list.add(new TodoItem(id,title,memo,current_date,cate,due_date,importance));
+				TodoItem t = new TodoItem(id,title,memo,current_date,cate,due_date,importance);
+				list.add(t);
+				
 				}
 			pstmt.close();
 		} catch (SQLException e) {
@@ -216,7 +221,8 @@ public class TodoList {
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
 				String importance = rs.getString("importance");
-				list.add(new TodoItem(id,title,memo,current_date,cate,due_date,importance));
+				TodoItem t = new TodoItem(id,title,memo,current_date,cate,due_date,importance);
+				list.add(t);
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -260,7 +266,10 @@ public class TodoList {
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
 				String importance = rs.getString("importance");
-				list.add(new TodoItem(id,title,memo,current_date,cate,due_date,importance));
+				String date = rs.getString("date");
+				TodoItem t = new TodoItem(id,title,memo,current_date,cate,due_date,importance);
+				t.setDays(date);
+				list.add(t);
 			}
 			pstmt.close();
 		} catch (SQLException e) {

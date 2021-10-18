@@ -150,6 +150,7 @@ public class TodoUtil {
 		System.out.println("[전체 목록, 총 "+l.getCount()+"개]\n");
 		for (TodoItem item : l.getList(num)) {
 			System.out.println(item.toString());
+			
 		}
 	}
 	public static void completeItem(TodoList l, int num) {
@@ -165,6 +166,8 @@ public class TodoUtil {
 		else
 			System.out.println("문제가 발생했습니다.");
 	}
+	
+
 }
 	
 	/* public static void saveList(TodoList l,String filename) {

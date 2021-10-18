@@ -19,8 +19,10 @@ public class Menu {
         System.out.println("12. comp id - 완료 과제 체크하기");
         System.out.println("13. ls_comp - 완료한 과제만 보기");
         System.out.println("14. impo - 과제 중요도 등록하기");
-        System.out.println("15. exit - 프로그램 종료하기");
-        System.out.println("16. reset - 프로그램 데이터 초기화 (프로그램 최초 사용시 실행해주세요)");
+        System.out.println("15. add_multi - 과제 여러개 추가하기");
+        System.out.println("16. edit_multi - 과제 여러개 수정하기");
+        System.out.println("17. exit - 프로그램 종료하기");
+        System.out.println("18. reset - 프로그램 데이터 초기화 (프로그램 최초 사용시 실행해주세요)");
         
     }
     public static void Prompt()

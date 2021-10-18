@@ -3,6 +3,8 @@ package com.todo.dao;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.todo.service.DateUtil;
+
 public class TodoItem {
 	private int id;
     public int getId() {
@@ -20,6 +22,7 @@ public class TodoItem {
     private String due_date;
     private int is_completed;
     private String importance;
+    private String days;
 
 
     public  String getImportance() {
@@ -45,16 +48,26 @@ public class TodoItem {
         SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
         this.current_date= f.format(new Date());
         this.due_date = due_date;
+        this.days = DateUtil.getDays(due_date);
         this.importance = importance;
     }
     
-    public TodoItem(int id, String title, String desc, String date, String category, String due_date, String importance){
+    public String getDays() {
+		return days;
+	}
+
+	public void setDays(String days) {
+		this.days = days;
+	}
+
+	public TodoItem(int id, String title, String desc, String date, String category, String due_date, String importance){
     	this.id = id;
         this.title=title;
         this.desc=desc;
         this.current_date=date;
         this.category=category;
         this.due_date=due_date;
+        this.days = DateUtil.getDays(due_date);
         this.importance = importance;
     }
     
@@ -64,6 +77,7 @@ public class TodoItem {
         this.current_date=date;
         this.category=category;
         this.due_date=due_date;
+        this.days = DateUtil.getDays(due_date);
         this.importance = importance;
     }
     
@@ -110,10 +124,10 @@ public class TodoItem {
 	@Override
 	public String toString() {
 		if(is_completed == 0) 
-			return id+". [" + category + "] "+ title + " - " + desc + " " + due_date + " " + current_date + " " + importance;
+			return id+". [" + category + "] "+" D"+days+" "+ title + " - " + desc + " " + due_date + " " + current_date + " " + importance;
 		else if (is_completed == 1)
-			return id+". [" + category + "] "+ title +"[V]"+ " - " + desc + " " + due_date + " " + current_date + " " + importance;
-		return id+". [" + category + "] "+ title + " - " + desc + " " + due_date + " " + current_date + " " + importance;
+			return id+". [" + category + "] "+" D"+days+" "+ title +"[V]"+ " - " + desc + " " + due_date + " " + current_date + " " + importance;
+		return id+". [" + category + "] "+" D"+days+" "+title + " - " + desc + " " + due_date + " " + current_date + " " + importance;
 			
 		
 	}
